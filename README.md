@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This project aims to simplify bank data used by developers for Fintech APIs (Flutterwave and Paystack). Paystack uses `bank_code` to process transfers to accounts while Flutterwave uses `bank_slug` for the same operation. As an added bonus, bank logos are also returned. How is this useful? -- can be used to spice up your bank dropdown/list UI, It doesn't have to be boring.
+This project aims to simplify bank data used by developers for Fintech APIs (Flutterwave and Paystack). Paystack uses `bank_code` to process transfers to accounts while Flutterwave uses `bank_slug` for the same operation. As a bonus, bank logos are also returned. How is this useful? -- can be used to spice up your bank dropdown/list UI, It doesn't have to be boring.
 
 ## Prerequisites
 * [Go](https://golang.org) installed on your machine
@@ -36,7 +36,7 @@ cp .env.example .env
 go run server.go
 ```
 
-Alternatively, if you are a Docker fanboy, your can run:
+Alternatively, if you are a Docker fanboy, you can run:
 
 ```bash
 docker-composer up
