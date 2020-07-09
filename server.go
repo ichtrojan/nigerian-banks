@@ -24,6 +24,7 @@ type BankJSON struct {
 	Name string `json:"name"`
 	Slug string `json:"slug"`
 	Code string `json:"code"`
+	Ussd string `json:"ussd"`
 }
 
 type Bank struct {
@@ -31,6 +32,7 @@ type Bank struct {
 	Slug string `json:"slug"`
 	Code string `json:"code"`
 	Logo string `json:"logo"`
+	Ussd string `json:"ussd"`
 }
 
 func main() {
@@ -82,6 +84,7 @@ func main() {
 				Slug: bank.Slug,
 				Code: bank.Code,
 				Logo: host + "/logo/" + getUrl(bank.Slug) + ".png",
+				Ussd: bank,Ussd
 			})
 		}
 
