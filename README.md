@@ -48,12 +48,11 @@ docker-composer up
 
 Your application will be served on port `9090` by default, you can change that by modifying the `.env` file.
 
-## Contributions
+## Contributors
 
-Please contribute
-* [Deji Ajibola] - [Twitter](https://twitter.com/damndeji) [GitHub](https://github.com/youthtrouble)
+* Deji Ajibola - [Twitter](https://twitter.com/damndeji) [GitHub](https://github.com/youthtrouble)
 
 ## Authors
 
-* [Kamsi Oleka] - [Twitter](https://twitter.com/Eze_Mmuo) [Github](https://github.com/kamsy)
-* [Michael Trojan Okoh] - [Twitter](https://twitter.com/ichtrojan) [Github](https://github.com/ichtrojan)
+* Kamsi Oleka - [Twitter](https://twitter.com/Eze_Mmuo) [Github](https://github.com/kamsy)
+* Michael Trojan Okoh - [Twitter](https://twitter.com/ichtrojan) [Github](https://github.com/ichtrojan)
