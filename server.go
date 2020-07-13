@@ -6,6 +6,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/ichtrojan/thoth"
 	"github.com/joho/godotenv"
+	"github.com/rs/cors"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -16,12 +17,12 @@ var (
 	logger, _ = thoth.Init("log")
 )
 
-//Error message struct for error messages
+// Error message struct for error messages
 type Error struct {
 	Message string
 }
 
-//BankJSON struct for banks.json
+// BankJSON struct for banks.json
 type BankJSON struct {
 	Name string `json:"name"`
 	Slug string `json:"slug"`
@@ -29,7 +30,7 @@ type BankJSON struct {
 	USSD string `json:"ussd"`
 }
 
-//Bank struct takes an extra field- logo
+// Bank Json struct to be returned to the user
 type Bank struct {
 	Name string `json:"name"`
 	Slug string `json:"slug"`
@@ -94,7 +95,9 @@ func main() {
 		_ = json.NewEncoder(writer).Encode(newBanks)
 	})
 
-	if err := http.ListenAndServe(":"+port, route); err != nil {
+	handler := cors.AllowAll().Handler(route)
+
+	if err := http.ListenAndServe(":"+port, handler); err != nil {
 		logger.Log(err)
 	}
 }

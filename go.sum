@@ -6,3 +6,5 @@ github.com/ichtrojan/thoth v1.3.0 h1:PSlZ1s+2a9cpWHagN/W9D9rKVjUckIYcivegVHvO1Lk
 github.com/ichtrojan/thoth v1.3.0/go.mod h1:jJvV8QN032F7fJPcKi+k9EuEn0sOJadJRFPHiivM1vc=
 github.com/joho/godotenv v1.3.0 h1:Zjp+RcGpHhGlrMbJzXTrZZPrWj+1vfm90La1wgB6Bhc=
 github.com/joho/godotenv v1.3.0/go.mod h1:7hK45KPybAkOC6peb+G5yklZfMxEjkZhHbwpqxOKXbg=
+github.com/rs/cors v1.7.0 h1:+88SsELBHx5r+hZ8TCkggzSstaWNbDvThkVK8H6f9ik=
+github.com/rs/cors v1.7.0/go.mod h1:gFx+x8UowdsKA9AchylcLynDq+nNFfI8FkUZdN/jGCU=
