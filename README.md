@@ -51,6 +51,7 @@ Your application will be served on port `9090` by default, you can change that b
 ## Contributions
 
 Please contribute
+* [Deji Ajibola] - [Twitter](https://twitter.com/damndeji) [GitHub](https://github.com/youthtrouble)
 
 ## Authors
 

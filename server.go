@@ -16,20 +16,25 @@ var (
 	logger, _ = thoth.Init("log")
 )
 
+//Error message struct for error messages
 type Error struct {
 	Message string
 }
 
+//BankJSON struct for banks.json
 type BankJSON struct {
 	Name string `json:"name"`
 	Slug string `json:"slug"`
 	Code string `json:"code"`
+	USSD string `json:"ussd"`
 }
 
+//Bank struct takes an extra field- logo
 type Bank struct {
 	Name string `json:"name"`
 	Slug string `json:"slug"`
 	Code string `json:"code"`
+	USSD string `json:"ussd"`
 	Logo string `json:"logo"`
 }
 
@@ -81,6 +86,7 @@ func main() {
 				Name: bank.Name,
 				Slug: bank.Slug,
 				Code: bank.Code,
+				USSD: bank.USSD,
 				Logo: host + "/logo/" + getUrl(bank.Slug) + ".png",
 			})
 		}
