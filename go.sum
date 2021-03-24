@@ -28,6 +28,8 @@ github.com/ichtrojan/horus v1.0.5 h1:mNfznWrIWw50O+ORzAMxFYzJ+j+41OBeJqWZAxjeA5U
 github.com/ichtrojan/horus v1.0.5/go.mod h1:vRHj38YxWPNEe/064WrXVNsHW2+jK+BItLAccC4hjZY=
 github.com/ichtrojan/horus v1.0.6 h1:u/VnxWOZd8oswd2HT6IOOYyGA8tEXso6T/1AN4gbPlo=
 github.com/ichtrojan/horus v1.0.6/go.mod h1:vRHj38YxWPNEe/064WrXVNsHW2+jK+BItLAccC4hjZY=
+github.com/ichtrojan/horus v1.0.7 h1:Mas/KNgEwTJPURVgnYCS/WigZ0CfZj0XEsSUrsfjFO4=
+github.com/ichtrojan/horus v1.0.7/go.mod h1:vRHj38YxWPNEe/064WrXVNsHW2+jK+BItLAccC4hjZY=
 github.com/ichtrojan/thoth v1.3.0 h1:PSlZ1s+2a9cpWHagN/W9D9rKVjUckIYcivegVHvO1Lk=
 github.com/ichtrojan/thoth v1.3.0/go.mod h1:jJvV8QN032F7fJPcKi+k9EuEn0sOJadJRFPHiivM1vc=
 github.com/jinzhu/gorm v1.9.16 h1:+IyIjPEABKRpsu/F8OvDPy9fyQlgsg2luMV2ZIH5i5o=
