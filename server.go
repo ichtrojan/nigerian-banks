@@ -149,7 +149,7 @@ func main() {
 
 	handler := cors.AllowAll().Handler(route)
 
-	if err = http.ListenAndServe(":"+horusDashboardPort, listener.Serve(horusDashboardKey)); err != nil {
+	if err = listener.Serve(":"+horusDashboardPort, horusDashboardKey); err != nil {
 		logger.Log(err)
 	}
 
