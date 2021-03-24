@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"github.com/gorilla/mux"
+	"github.com/ichtrojan/horus"
 	"github.com/ichtrojan/thoth"
 	"github.com/joho/godotenv"
 	"github.com/rs/cors"
@@ -17,12 +18,10 @@ var (
 	logger, _ = thoth.Init("log")
 )
 
-// Error message struct for error messages
 type Error struct {
 	Message string
 }
 
-// BankJSON struct for banks.json
 type BankJSON struct {
 	Name string `json:"name"`
 	Slug string `json:"slug"`
@@ -30,7 +29,6 @@ type BankJSON struct {
 	USSD string `json:"ussd"`
 }
 
-// Bank Json struct to be returned to the user
 type Bank struct {
 	Name string `json:"name"`
 	Slug string `json:"slug"`
@@ -65,6 +63,60 @@ func main() {
 		logger.Log(err)
 	}
 
+	horusDbUser, exist := os.LookupEnv("HORUS_DB_USER")
+
+	if !exist {
+		log.Fatal("HORUS_DB_USER not set in .env")
+	}
+
+	horusDbPass, exist := os.LookupEnv("HORUS_DB_PASS")
+
+	if !exist {
+		log.Fatal("HORUS_DB_PASS not set in .env")
+	}
+
+	horusDbHost, exist := os.LookupEnv("HORUS_DB_HOST")
+
+	if !exist {
+		log.Fatal("HORUS_DB_HOST not set in .env")
+	}
+
+	horusDbName, exist := os.LookupEnv("HORUS_DB_NAME")
+
+	if !exist {
+		log.Fatal("HORUS_DB_NAME not set in .env")
+	}
+
+	horusDbPort, exist := os.LookupEnv("HORUS_DB_PORT")
+
+	if !exist {
+		log.Fatal("HORUS_DB_PORT not set in .env")
+	}
+
+	horusDashboardPort, exist := os.LookupEnv("HORUS_DASHBOARD_PORT")
+
+	if !exist {
+		log.Fatal("HORUS_DASHBOARD_PORT not set in .env")
+	}
+
+	horusDashboardKey, exist := os.LookupEnv("HORUS_DASHBOARD_KEY")
+
+	if !exist {
+		log.Fatal("HORUS_DASHBOARD_KEY not set in .env")
+	}
+
+	listener, err := horus.Init("mysql", horus.Config{
+		DbName:    horusDbName,
+		DbHost:    horusDbHost,
+		DbPssword: horusDbPass,
+		DbPort:    horusDbPort,
+		DbUser:    horusDbUser,
+	})
+
+	if err != nil {
+		logger.Log(err)
+	}
+
 	var banks []BankJSON
 
 	if err := json.Unmarshal(bankJson, &banks); err != nil {
@@ -75,9 +127,9 @@ func main() {
 
 	route.PathPrefix("/logo/").Handler(http.StripPrefix("/logo/", http.FileServer(http.Dir("./logos"))))
 
-	route.NotFoundHandler = http.HandlerFunc(notFound)
+	route.NotFoundHandler = http.HandlerFunc(listener.Watch(notFound))
 
-	route.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
+	route.HandleFunc("/", listener.Watch(func(writer http.ResponseWriter, request *http.Request) {
 		writer.Header().Set("Content-Type", "application/json")
 
 		var newBanks []Bank
@@ -93,9 +145,13 @@ func main() {
 		}
 
 		_ = json.NewEncoder(writer).Encode(newBanks)
-	})
+	}))
 
 	handler := cors.AllowAll().Handler(route)
+
+	if err = http.ListenAndServe(":"+horusDashboardPort, listener.Serve(horusDashboardKey)); err != nil {
+		logger.Log(err)
+	}
 
 	if err := http.ListenAndServe(":"+port, handler); err != nil {
 		logger.Log(err)
