@@ -126,6 +126,12 @@
     "ussd": "*322*318*0#"
   },
   {
+    "name": "PayCom",
+    "slug": "paycom",
+    "code": "100004",
+    "ussd": "*955#"
+  },
+  {
     "name": "Polaris Bank",
     "slug": "polaris-bank",
     "code": "076",
