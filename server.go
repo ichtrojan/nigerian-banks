@@ -2,19 +2,13 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
 	"github.com/gorilla/mux"
-	"github.com/ichtrojan/thoth"
 	"github.com/joho/godotenv"
 	"github.com/rs/cors"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
-)
-
-var (
-	logger, _ = thoth.Init("log")
 )
 
 type Error struct {
@@ -38,38 +32,35 @@ type Bank struct {
 
 func main() {
 	if err := godotenv.Load(); err != nil {
-		logger.Log(errors.New("no .env file found"))
 		log.Fatal("No .env file found")
 	}
 
 	port, exist := os.LookupEnv("PORT")
 
 	if !exist {
-		logger.Log(errors.New("PORT not set in .env"))
 		log.Fatal("PORT not set in .env")
 	}
 
 	host, exist := os.LookupEnv("HOST")
 
 	if !exist {
-		logger.Log(errors.New("HOST not set in .env"))
 		log.Fatal("HOST not set in .env")
 	}
 
 	bankJson, err := ioutil.ReadFile("./banks.json")
 
 	if err != nil {
-		logger.Log(err)
+		log.Fatal(err)
 	}
 
 	if err != nil {
-		logger.Log(err)
+		log.Fatal(err)
 	}
 
 	var banks []BankJSON
 
 	if err := json.Unmarshal(bankJson, &banks); err != nil {
-		logger.Log(err)
+		log.Fatal(err)
 	}
 
 	route := mux.NewRouter()
@@ -99,7 +90,7 @@ func main() {
 	handler := cors.AllowAll().Handler(route)
 
 	if err := http.ListenAndServe(":"+port, handler); err != nil {
-		logger.Log(err)
+		log.Fatal(err)
 	}
 }
 
@@ -119,7 +110,7 @@ func getUrl(slug string) string {
 	f, err := os.Open("./logos")
 
 	if err != nil {
-		logger.Log(err)
+		log.Fatal(err)
 	}
 
 	fileInfo, err := f.Readdir(0)
@@ -127,7 +118,7 @@ func getUrl(slug string) string {
 	_ = f.Close()
 
 	if err != nil {
-		logger.Log(err)
+		log.Fatal(err)
 	}
 
 	for _, file := range fileInfo {
