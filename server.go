@@ -93,18 +93,6 @@ func main() {
 		log.Fatal("HORUS_DB_PORT not set in .env")
 	}
 
-	horusDashboardPort, exist := os.LookupEnv("HORUS_DASHBOARD_PORT")
-
-	if !exist {
-		log.Fatal("HORUS_DASHBOARD_PORT not set in .env")
-	}
-
-	horusDashboardKey, exist := os.LookupEnv("HORUS_DASHBOARD_KEY")
-
-	if !exist {
-		log.Fatal("HORUS_DASHBOARD_KEY not set in .env")
-	}
-
 	listener, err := horus.Init("mysql", horus.Config{
 		DbName:    horusDbName,
 		DbHost:    horusDbHost,
@@ -148,10 +136,6 @@ func main() {
 	}))
 
 	handler := cors.AllowAll().Handler(route)
-
-	if err = listener.Serve(":"+horusDashboardPort, horusDashboardKey); err != nil {
-		logger.Log(err)
-	}
 
 	if err := http.ListenAndServe(":"+port, handler); err != nil {
 		logger.Log(err)
