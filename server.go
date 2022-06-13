@@ -53,10 +53,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	var banks []BankJSON
 
 	if err := json.Unmarshal(bankJson, &banks); err != nil {
