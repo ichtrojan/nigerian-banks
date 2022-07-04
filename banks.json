@@ -120,6 +120,12 @@
     "ussd": "*1303#"
   },
   {
+    "name": "Paga",
+    "slug": "paga",
+    "code": "327",
+    "ussd": ""
+  },
+  {
     "name": "Parallex Bank",
     "slug": "parallex-bank",
     "code": "526",
