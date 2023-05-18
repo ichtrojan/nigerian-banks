@@ -9,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 )
 
 type Error struct {
@@ -83,6 +84,64 @@ func main() {
 		_ = json.NewEncoder(writer).Encode(newBanks)
 	})
 
+	route.HandleFunc("/slug/{slug}", func(writer http.ResponseWriter, request *http.Request) {
+		writer.Header().Set("Content-Type", "application/json")
+
+		var slug = strings.Split(request.URL.Path, "/")[2]
+
+		var found Bank
+
+		for _, bank := range banks {
+			// Uncomment the partial Match to match the first partial slug match
+			if exactMatch(slug, bank.Slug) /*|| partialMatch(slug, bank.Slug)*/ {
+				found = Bank{
+					Name: bank.Name,
+					Slug: bank.Slug,
+					Code: bank.Code,
+					USSD: bank.USSD,
+					Logo: host + "/logo/" + getUrl(bank.Slug) + ".png",
+				}
+
+				break
+			}
+		}
+		if found.Name == "" {
+			_ = json.NewEncoder(writer).Encode(nil)
+		} else {
+			_ = json.NewEncoder(writer).Encode(found)
+		}
+
+	})
+
+	route.HandleFunc("/code/{code}", func(writer http.ResponseWriter, request *http.Request) {
+		writer.Header().Set("Content-Type", "application/json")
+
+		var code = strings.Split(request.URL.Path, "/")[2]
+
+		var found Bank
+
+		for _, bank := range banks {
+			// Uncomment the partial Match to match the first partial code match
+			if exactMatch(code, bank.Code) /*|| partialMatch(code, bank.Code)*/ {
+				found = Bank{
+					Name: bank.Name,
+					Slug: bank.Slug,
+					Code: bank.Code,
+					USSD: bank.USSD,
+					Logo: host + "/logo/" + getUrl(bank.Slug) + ".png",
+				}
+
+				break
+			}
+		}
+		if found.Name == "" {
+			_ = json.NewEncoder(writer).Encode(nil)
+		} else {
+			_ = json.NewEncoder(writer).Encode(found)
+		}
+
+	})
+
 	handler := cors.AllowAll().Handler(route)
 
 	if err := http.ListenAndServe(":"+port, handler); err != nil {
@@ -141,4 +200,14 @@ func find(slice []string, val string) (int, bool) {
 		}
 	}
 	return -1, false
+}
+
+func exactMatch(slug string, bankSlug string) bool {
+	return strings.ToLower(slug) == strings.ToLower(bankSlug)
+}
+
+func partialMatch(s1 string, s2 string) bool {
+	var s1Lower = strings.ToLower(s1)
+	var s2Lower = strings.ToLower(s2)
+	return strings.Contains(s1Lower, s2Lower) || strings.Contains(s2Lower, s1Lower)
 }
