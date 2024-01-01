@@ -68,6 +68,28 @@ func main() {
 	route.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
 		writer.Header().Set("Content-Type", "application/json")
 
+		code := request.URL.Query().Get("code")
+		slug := request.URL.Query().Get("slug")
+
+		if code != "" || slug != "" {
+			// Perform an SQL "and" query to find the exact match
+			for _, bank := range banks {
+				if (code == "" || code == bank.Code) && (slug == "" || slug == bank.Slug) {
+					_ = json.NewEncoder(writer).Encode(Bank{
+						Name: bank.Name,
+						Slug: bank.Slug,
+						Code: bank.Code,
+						USSD: bank.USSD,
+						Logo: host + "/logo/" + getUrl(bank.Slug) + ".png",
+					})
+					return
+				}
+			}
+			_ = json.NewEncoder(writer).Encode(nil)
+			return
+		}
+
+		// No code and slug provided, return all banks
 		var newBanks []Bank
 
 		for _, bank := range banks {
