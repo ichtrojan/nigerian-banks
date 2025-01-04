@@ -1,5 +1,11 @@
 [
   {
+    "name": "Zenith Bank",
+    "slug": "zenith-bank",
+    "code": "468588",
+    "ussd": "*966#"
+  },
+  {
     "name": "Access Bank",
     "slug": "access-bank",
     "code": "044",
@@ -132,7 +138,7 @@
     "ussd": "*322*318*0#"
   },
   {
-    "name": "PayCom",
+    "name": "Opay",
     "slug": "paycom",
     "code": "100004",
     "ussd": "*955#"
