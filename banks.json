@@ -118,7 +118,7 @@
     "slug": "moniepoint-mfb-ng",
     "code": "50515",
     "ussd": "*5573#"
-  }
+  },
   {
     "name": "One Finance",
     "slug": "one-finance",
@@ -130,7 +130,7 @@
     "slug": "paycom",
     "code": "999992",
     "ussd": "*955#"
-  }
+  },
   {
     "name": "Paga",
     "slug": "paga",
@@ -142,7 +142,7 @@
     "slug": "palmpay",
     "code": "999991",
     "ussd": "*861#"
-  }
+  },
   {
     "name": "Parallex Bank",
     "slug": "parallex-bank",
