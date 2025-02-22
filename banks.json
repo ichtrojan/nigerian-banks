@@ -126,7 +126,7 @@
     "ussd": "*1303#"
   },
   {
-    "name": "OPay Digital Services Limited (OPay)",
+    "name": "OPay",
     "slug": "paycom",
     "code": "999992",
     "ussd": "*955#"
