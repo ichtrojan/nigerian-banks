@@ -114,6 +114,12 @@
     "ussd": ""
   },
   {
+    "name": "Lotus Bank",
+    "slug": "lotus-bank",
+    "code": "303",
+    "ussd": "*5045#"
+  },
+  {
     "name": "Moniepoint MFB",
     "slug": "moniepoint-mfb-ng",
     "code": "50515",
