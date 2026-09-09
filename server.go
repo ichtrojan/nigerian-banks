@@ -68,6 +68,8 @@ func main() {
 	route.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
 		writer.Header().Set("Content-Type", "application/json")
 
+		files := logoFiles()
+
 		code := request.URL.Query().Get("code")
 		slug := request.URL.Query().Get("slug")
 
@@ -80,7 +82,7 @@ func main() {
 						Slug: bank.Slug,
 						Code: bank.Code,
 						USSD: bank.USSD,
-						Logo: host + "/logo/" + getUrl(bank.Slug) + ".png",
+						Logo: host + "/logo/" + getUrl(files, bank.Slug) + ".png",
 					})
 					return
 				}
@@ -98,7 +100,7 @@ func main() {
 				Slug: bank.Slug,
 				Code: bank.Code,
 				USSD: bank.USSD,
-				Logo: host + "/logo/" + getUrl(bank.Slug) + ".png",
+				Logo: host + "/logo/" + getUrl(files, bank.Slug) + ".png",
 			})
 		}
 
@@ -122,45 +124,28 @@ func notFound(writer http.ResponseWriter, request *http.Request) {
 	})
 }
 
-func getUrl(slug string) string {
-	var files []string
-
-	f, err := os.Open("./logos")
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fileInfo, err := f.Readdir(0)
-
-	_ = f.Close()
+// ponytail: scanned once per request, not once per bank -- 281 banks made the old
+// per-bank Readdir a few hundred syscalls on every "all banks" call
+func logoFiles() map[string]bool {
+	entries, err := os.ReadDir("./logos")
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	for _, file := range fileInfo {
-		if file.Name() == ".DS_Store" {
-			continue
-		}
+	files := make(map[string]bool, len(entries))
 
-		files = append(files, file.Name())
+	for _, entry := range entries {
+		files[entry.Name()] = true
 	}
 
-	_, found := find(files, slug+".png")
+	return files
+}
 
-	if found {
+func getUrl(files map[string]bool, slug string) string {
+	if files[slug+".png"] {
 		return slug
 	}
 
 	return "default-image"
-}
-
-func find(slice []string, val string) (int, bool) {
-	for i, item := range slice {
-		if item == val {
-			return i, true
-		}
-	}
-	return -1, false
 }
