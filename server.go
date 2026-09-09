@@ -127,7 +127,7 @@ func notFound(writer http.ResponseWriter, request *http.Request) {
 // ponytail: scanned once per request, not once per bank -- 281 banks made the old
 // per-bank Readdir a few hundred syscalls on every "all banks" call
 func logoFiles() map[string]bool {
-	entries, err := os.ReadDir("./logos")
+	entries, err := ioutil.ReadDir("./logos")
 
 	if err != nil {
 		log.Fatal(err)
