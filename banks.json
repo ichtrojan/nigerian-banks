@@ -282,6 +282,12 @@
     "ussd": ""
   },
   {
+    "name": "BLOC MFB",
+    "slug": "bloc-mfb",
+    "code": "51411",
+    "ussd": ""
+  },
+  {
     "name": "BOLD MFB",
     "slug": "bold-mfb",
     "code": "50725",
@@ -393,6 +399,12 @@
     "name": "CITYCODE MORTAGE BANK",
     "slug": "citycode-mortage-bank",
     "code": "070027",
+    "ussd": ""
+  },
+  {
+    "name": "Civic Microfinance Bank Limited",
+    "slug": "civic-microfinance-bank-limited",
+    "code": "50186",
     "ussd": ""
   },
   {
@@ -1311,6 +1323,12 @@
     "name": "ROCKSHIELD MICROFINANCE BANK",
     "slug": "rockshield-microfinance-bank",
     "code": "50767",
+    "ussd": ""
+  },
+  {
+    "name": "RSU MICROFINANCE BANK",
+    "slug": "rsu-microfinance-bank",
+    "code": "50622",
     "ussd": ""
   },
   {
