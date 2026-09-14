@@ -1,6 +1,6 @@
 # Nigerian Banks
 
-![hero](https://res.cloudinary.com/ichtrojan/image/upload/v1594159123/ngbanks_kzboia.png)
+<img src="assets/hero.png" alt="hero" width="320">
 
 ## Introduction
 
