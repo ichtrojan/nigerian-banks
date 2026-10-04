@@ -1,11 +1,9 @@
 module github.com/ichtrojan/banks
 
-go 1.14
+go 1.27
 
 require (
 	github.com/gorilla/mux v1.7.4
-	github.com/ichtrojan/horus v1.0.9
-	github.com/ichtrojan/thoth v1.3.0
 	github.com/joho/godotenv v1.3.0
 	github.com/rs/cors v1.7.0
 )
