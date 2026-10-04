@@ -31,9 +31,8 @@ type Bank struct {
 }
 
 func main() {
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("No .env file found")
-	}
+	// .env is optional: in Docker, PORT/HOST come from docker-compose
+	_ = godotenv.Load()
 
 	port, exist := os.LookupEnv("PORT")
 

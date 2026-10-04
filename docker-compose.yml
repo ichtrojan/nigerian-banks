@@ -5,3 +5,6 @@ services:
     ports:
       - "9090:9090"
       - "8989:8989"
+    environment:
+      PORT: 9090
+      HOST: ${HOST:-http://localhost:9090}
