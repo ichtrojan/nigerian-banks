@@ -13,5 +13,8 @@ RUN CGO_ENABLED=0
 RUN go install .
 
 FROM gcr.io/distroless/base
-COPY --from=build-env /go/bin /
-CMD ["/banks"]
+WORKDIR /app
+COPY --from=build-env /go/bin/banks /app/banks
+COPY --from=build-env /banks/banks.json /app/banks.json
+COPY --from=build-env /banks/logos /app/logos
+CMD ["/app/banks"]
