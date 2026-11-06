@@ -2,13 +2,13 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/gorilla/mux"
-	"github.com/joho/godotenv"
-	"github.com/rs/cors"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
+	"github.com/rs/cors"
 )
 
 type Error struct {
@@ -46,8 +46,7 @@ func main() {
 		log.Fatal("HOST not set in .env")
 	}
 
-	bankJson, err := ioutil.ReadFile("./banks.json")
-
+	bankJson, err := os.ReadFile("./banks.json")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -126,8 +125,7 @@ func notFound(writer http.ResponseWriter, request *http.Request) {
 // ponytail: scanned once per request, not once per bank -- 281 banks made the old
 // per-bank Readdir a few hundred syscalls on every "all banks" call
 func logoFiles() map[string]bool {
-	entries, err := ioutil.ReadDir("./logos")
-
+	entries, err := os.ReadDir("./logos")
 	if err != nil {
 		log.Fatal(err)
 	}
